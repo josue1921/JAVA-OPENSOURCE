@@ -1,0 +1,14 @@
+com\jaxws\series\td\spring\hibernate\dao\MusicDAOImpl.class
+com\jaxws\series\td\spring\hibernate\model\Music.class
+in\benchresources\entities\music\MovieType.class
+in\benchresources\services\musicservice\IMusicService.class
+in\benchresources\entities\music\ObjectFactory.class
+in\benchresources\entities\music\MusicListRequestType.class
+in\benchresources\entities\music\MusicListResponseType.class
+in\benchresources\services\musicservice\MusicService.class
+in\benchresources\entities\music\BusinessFaultType.class
+in\benchresources\services\musicservice\BusinessException.class
+com\jaxws\series\td\spring\hibernate\dao\MusicDAO.class
+com\jaxws\series\td\spring\hibernate\service\MusicServiceImpl.class
+in\benchresources\entities\music\MovieListType.class
+in\benchresources\entities\music\package-info.class

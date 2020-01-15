@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Persona">
+	<select id="consultaPersona" resultMap="resultadoPersona">
+		SELECT id_person ID,name_person NOMBRE, apat_person APELLIDO_PATERNO,amat_person APELLIDO_MATERNO, 
+		phone TELEFONO, email CORREO, CASE WHEN genero = 1 THEN "Masculino" WHEN genero = 2 THEN "Femenino" END As SEXO, RFC 
+		FROM test.app_personas WHERE RFC = #{rfc}
+	</select>
+	<resultMap type="Empleado" id="resultadoEmpleado">
+		<result column="ID" property="id" />
+		<result column="NOMBRE" property="name" />
+		<result column="APELLIDO_PATERNO" property="apat" />
+		<result column="APELLIDO_MATERNO" property="amat" />
+		<result column="TELEFONO" property="phone" />
+		<result column="CORREO" property="mail" />
+		<result column="SEXO" property="gender" />
+		<result column="RFC" property="rfc" />
+	</resultMap>
+</mapper>

@@ -1,0 +1,2 @@
+[2020-01-15 17:05:21.209] [renderer1] [info] 2020-01-15T23:05:20.399Z - [viper-service] ViperService is initializing
+[2020-01-15 17:05:51.413] [renderer1] [info] 2020-01-15T23:05:51.413Z - [websocket] Connection Error: Error: connect ECONNREFUSED 127.0.0.1:65291

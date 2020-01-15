@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.mx.telefonica.meta4.bean.Empleado" alias="Empleado" />
+		<typeAlias type="com.mx.telefonica.meta4.bean.Consumos" alias="Consumos" />
+	</typeAliases>
+	<environments default="weblogic" >
+		<environment id="weblogic">
+			<transactionManager type="MANAGED" />
+			<dataSource type="JNDI">
+				<property name="data_source" value="Meta4Comedor"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/mx/telefonica/meta4/data/EmpleadoMapper.xml" />
+		<mapper resource="com/mx/telefonica/meta4/data/ConsumosMapper.xml" />
+	</mappers>
+</configuration>

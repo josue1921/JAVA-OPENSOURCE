@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:mus="http://benchresources.in/entities/music">
+	<soapenv:Header />
+	<soapenv:Body>
+		<mus:MusicListRequestType>
+			<mus:composerName>AR Rahman</mus:composerName>
+		</mus:MusicListRequestType>
+	</soapenv:Body>
+</soapenv:Envelope>

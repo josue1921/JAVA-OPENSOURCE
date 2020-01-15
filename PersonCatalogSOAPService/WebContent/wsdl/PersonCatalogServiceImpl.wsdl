@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://example.service.web.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://example.service.web.com" xmlns:intf="http://example.service.web.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://example.service.web.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="insertProduct">
+    <complexType>
+     <sequence>
+      <element name="person" type="impl:Person"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Person">
+    <sequence>
+     <element name="amat" nillable="true" type="xsd:string"/>
+     <element name="apat" nillable="true" type="xsd:string"/>
+     <element name="gender" type="xsd:int"/>
+     <element name="id" type="xsd:int"/>
+     <element name="mail" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="phone" nillable="true" type="xsd:string"/>
+     <element name="rfc" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="insertProductResponse">
+    <complexType/>
+   </element>
+   <element name="getAllPerson">
+    <complexType/>
+   </element>
+   <element name="getAllPersonResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllPersonReturn" type="impl:Person"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchbyId">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchbyIdResponse">
+    <complexType>
+     <sequence>
+      <element name="searchbyIdReturn" type="impl:Person"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="insertProductResponse">
+
+      <wsdl:part element="impl:insertProductResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllPersonResponse">
+
+      <wsdl:part element="impl:getAllPersonResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchbyIdResponse">
+
+      <wsdl:part element="impl:searchbyIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertProductRequest">
+
+      <wsdl:part element="impl:insertProduct" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchbyIdRequest">
+
+      <wsdl:part element="impl:searchbyId" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllPersonRequest">
+
+      <wsdl:part element="impl:getAllPerson" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="PersonCatalogServiceImpl">
+
+      <wsdl:operation name="insertProduct">
+
+         <wsdl:input message="impl:insertProductRequest" name="insertProductRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:insertProductResponse" name="insertProductResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllPerson">
+
+         <wsdl:input message="impl:getAllPersonRequest" name="getAllPersonRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllPersonResponse" name="getAllPersonResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchbyId">
+
+         <wsdl:input message="impl:searchbyIdRequest" name="searchbyIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchbyIdResponse" name="searchbyIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="PersonCatalogServiceImplSoapBinding" type="impl:PersonCatalogServiceImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="insertProduct">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="insertProductRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="insertProductResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllPerson">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllPersonRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllPersonResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchbyId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchbyIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchbyIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="PersonCatalogServiceImplService">
+
+      <wsdl:port binding="impl:PersonCatalogServiceImplSoapBinding" name="PersonCatalogServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/PersonCatalogSOAPService/services/PersonCatalogServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

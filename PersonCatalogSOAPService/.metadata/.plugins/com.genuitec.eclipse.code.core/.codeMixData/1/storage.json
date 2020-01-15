@@ -1,0 +1,14 @@
+{
+    "telemetry.machineId": "53fc3414-f711-43b5-ac26-2286ab63f9c7",
+    "openedPathsList": {
+        "workspaces3": [
+            {
+                "id": "e73d429cc01dc87033d4a62937ab73e9",
+                "configURIPath": "file:///c%3A/SPRING-HIBER-MYSQL-PRACTICO/PersonCatalogSOAPService/.metadata/codemix.code-workspace"
+            }
+        ],
+        "files2": []
+    },
+    "theme": "vs-dark",
+    "themeBackground": "#1e1e1e"
+}

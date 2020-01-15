@@ -1,0 +1,42 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PersonCatalogServiceImplService WSDL service -->
+
+  <service name="PersonCatalogServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://example.service.web.com"/>
+      <parameter name="wsdlServiceElement" value="PersonCatalogServiceImplService"/>
+      <parameter name="schemaQualified" value="http://example.service.web.com"/>
+      <parameter name="wsdlServicePort" value="PersonCatalogServiceImpl"/>
+      <parameter name="className" value="com.web.service.example.PersonCatalogServiceImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="PersonCatalogServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="insertProduct" qname="operNS:insertProduct" xmlns:operNS="http://example.service.web.com" soapAction="" >
+        <parameter qname="pns:person" xmlns:pns="http://example.service.web.com" type="tns:Person" xmlns:tns="http://example.service.web.com"/>
+      </operation>
+      <operation name="getAllPerson" qname="operNS:getAllPerson" xmlns:operNS="http://example.service.web.com" returnQName="retNS:getAllPersonReturn" xmlns:retNS="http://example.service.web.com" returnType="rtns:Person" xmlns:rtns="http://example.service.web.com" soapAction="" >
+      </operation>
+      <operation name="searchbyId" qname="operNS:searchbyId" xmlns:operNS="http://example.service.web.com" returnQName="retNS:searchbyIdReturn" xmlns:retNS="http://example.service.web.com" returnType="rtns:Person" xmlns:rtns="http://example.service.web.com" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://example.service.web.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getAllPerson insertProduct searchbyId"/>
+
+      <typeMapping
+        xmlns:ns="http://example.service.web.com"
+        qname="ns:Person"
+        type="java:com.web.service.example.Person"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

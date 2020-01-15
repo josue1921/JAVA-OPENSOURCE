@@ -1,0 +1,18 @@
+Database: Creating table and inserting few records for this example
+
+Create Table command
+CREATE TABLE `MUSIC` (
+  `MUSIC_ID` INT(6) NOT NULL AUTO_INCREMENT,
+  `MOVIE_NAME` VARCHAR(50) NOT NULL,
+  `MOVIE_DIRECTOR` VARCHAR(50) NOT NULL,
+  `YEAR_OF_RELEASE` VARCHAR(50) NOT NULL,
+  `COMMENTS` VARCHAR(50),
+  PRIMARY KEY (`MUSIC_ID`)
+);
+
+Insert command (examples)
+
+INSERT INTO `music`(`MOVIE_NAME`, `MOVIE_DIRECTOR`, `YEAR_OF_RELEASE`, `COMMENTS`) VALUES ('Alaipayuthey','Mani Ratnam','2000','Romantic drama');
+INSERT INTO `music`(`MOVIE_NAME`, `MOVIE_DIRECTOR`, `YEAR_OF_RELEASE`, `COMMENTS`) VALUES ('Slumdog Millionaire','Danny Boyle','2009','British drama film');
+INSERT INTO `music`(`MOVIE_NAME`, `MOVIE_DIRECTOR`, `YEAR_OF_RELEASE`, `COMMENTS`) VALUES ('Rockstar','Imtiaz Ali','2011','Feature film');
+INSERT INTO `music`(`MOVIE_NAME`, `MOVIE_DIRECTOR`, `YEAR_OF_RELEASE`, `COMMENTS`) VALUES ('I','S Shankar','2014','Romantic thriller');

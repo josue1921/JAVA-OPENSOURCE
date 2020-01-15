@@ -1,0 +1,33 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<MusicListResponseType xmlns="http://benchresources.in/entities/music">
+			<composer>AR Rahman</composer>
+			<MovieListType>
+				<MovieType>
+					<movieName>Alaipayuthey</movieName>
+					<year>2000</year>
+					<director>Mani Ratnam</director>
+					<comments>Romantic drama</comments>
+				</MovieType>
+				<MovieType>
+					<movieName>Slumdog Millionaire</movieName>
+					<year>2009</year>
+					<director>Danny Boyle</director>
+					<comments>British drama film</comments>
+				</MovieType>
+				<MovieType>
+					<movieName>Rockstar</movieName>
+					<year>2011</year>
+					<director>Imtiaz Ali</director>
+					<comments>Feature film</comments>
+				</MovieType>
+				<MovieType>
+					<movieName>I</movieName>
+					<year>2014</year>
+					<director>S Shankar</director>
+					<comments>Romantic thriller</comments>
+				</MovieType>
+			</MovieListType>
+		</MusicListResponseType>
+	</soap:Body>
+</soap:Envelope>

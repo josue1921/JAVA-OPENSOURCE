@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Empleado">
+	<select id="consultaEmpleado" resultMap="resultadoEmpleado">
+SELECT A.CME_ID_RED ID_RED, A.STD_N_FIRST_NAME NOMBRE,A.STD_N_FAM_NAME_1 APELLIDO_PATERNO, A.STD_N_MAIDEN_NAME APELLIDO_MATERNO, B.STD_DT_BIRTH FECHA_NACIMIENTO,
+       DECODE (B.STD_ID_GENDER, 1, 'MASCULINO', 'FEMENINO') SEXO, A.STD_EMAIL CORREO, A.CME_N_DIVISION DIVISION, A.CME_N_GERENCIA GERENCIA, A.STD_N_JOB_CODE PUESTO,
+       A.CME_N_DEPARTAMENTO DEPARTAMENTO, A.STD_N_WORK_LOCAT LUGAR_TRABAJO, A.ID_REGION_COFETEL REGION, H.SSP_FEC_ANTIGUEDAD FECHA_ANIVERSARIO,
+       D.CME_ID_RED ID_JEFE, RTRIM (D.STD_N_FIRST_NAME || ' ' || D.STD_N_FAM_NAME_1 || ' ' || D.STD_N_MAIDEN_NAME) NOMBRE_JEFE,
+       E.CME_ID_RED ID_APROBADOR, RTRIM (E.STD_N_FIRST_NAME || ' ' || E.STD_N_FAM_NAME_1 || ' ' || E.STD_N_MAIDEN_NAME) NOMBRE_APROBADOR,
+       A.STD_N_LEG_ENT EMPRESA, A.STD_SS_NUMBER RFC, A.CME_ID_CONVENIO ID_CONVENIO, A.CME_N_CONVENIO NOMBRE_CONVENIO, 'INTERNO' TIPO_EMPLEADO,
+       SSP_ID_CENT_COSTO CENTRO_COSTOS
+  FROM M4CME_DATOS_EMP A,
+       STD_PERSON B,
+       M4SAR_H_HR_C_COSTO C,
+       M4CME_DATOS_EMP D,
+       M4CME_DATOS_EMP E,
+       STD_HR_PERIOD H
+ WHERE A.ID_EMPLEADO_INT = B.STD_ID_PERSON
+       AND A.ID_EMPLEADO_INT = H.STD_ID_HR(+)
+       AND A.STD_DT_START = H.STD_DT_START
+       AND A.ID_EMPLEADO_INT = C.SCO_ID_HR(+)
+       AND  SYSDATE >= C.DT_START
+       AND C.DT_END >= SYSDATE
+       AND A.ID_JEFE = D.ID_EMPLEADO_INT(+)
+       AND A.ID_APROBADOR = E.ID_EMPLEADO_INT(+)
+       AND A.CME_ESTADO = 'ACTIVO'
+       AND A.CME_TIPO_EMPLEADO = '1'
+       AND A.CME_ID_RED = #{idRedExt}
+UNION
+  SELECT A.CME_ID_RED ID_RED,
+       A.STD_N_FIRST_NAME NOMBRE,
+       A.STD_N_FAM_NAME_1 APELLIDO_PATERNO,
+       A.STD_N_MAIDEN_NAME APELLIDO_MATERNO,
+       B.STD_DT_BIRTH FECHA_NACIMIENTO,
+       DECODE (B.STD_ID_GENDER, 1, 'MASCULINO', 'FEMENINO') SEXO,
+       A.STD_EMAIL CORREO,
+       A.CME_N_DIVISION DIVISION,
+       A.CME_N_GERENCIA GERENCIA,
+       A.STD_N_JOB_CODE PUESTO,
+       A.CME_N_DEPARTAMENTO DEPARTAMENTO,
+       A.STD_N_WORK_LOCAT LUGAR_TRABAJO,
+       A.ID_REGION_COFETEL REGION,
+       A.STD_DT_START FECHA_ANIVERSARIO,
+       A.ID_JEFE ID_JEFE,
+       RTRIM (E.STD_N_FIRST_NAME
+       || ' '
+       || E.STD_N_FAM_NAME_1
+       || ' '
+       || E.STD_N_MAIDEN_NAME)
+          NOMBRE_JEFE,
+       A.ID_APROBADOR ID_APROBADOR,
+       RTRIM (F.STD_N_FIRST_NAME
+       || ' '
+       || F.STD_N_FAM_NAME_1
+       || ' '
+       || F.STD_N_MAIDEN_NAME)
+          NOMBRE_APROBADOR,
+       A.STD_N_LEG_ENT EMPRESA,
+       A.STD_SS_NUMBER RFC,
+       A.CME_ID_CONVENIO ID_CONVENIO,
+       A.CME_N_CONVENIO NOMBRE_CONVENIO,
+       'EXTERNO' TIPO_EMPLEADO,
+       NULL CENTRO_COSTOS
+  FROM M4CME_DATOS_EMP A,
+       STD_PERSON B,
+       STD_PERSON E,
+       STD_PERSON F
+ WHERE  A.ID_EMPLEADO = B.STD_ID_PERSON(+)
+       AND A.ID_JEFE = E.STD_ID_PERSON(+)
+       AND A.ID_APROBADOR = F.STD_ID_PERSON(+)
+       AND A.CME_ESTADO = 'ACTIVO'
+       AND A.CME_TIPO_EMPLEADO = '2'
+       AND A.CME_ID_RED = #{idRedExt}
+	</select>
+	<select id="consultaEmpleadoInicial" resultMap="resultadoEmpleado">
+	   SELECT A.CME_ID_RED ID_RED, A.STD_N_FIRST_NAME NOMBRE,A.STD_N_FAM_NAME_1 APELLIDO_PATERNO, A.STD_N_MAIDEN_NAME APELLIDO_MATERNO, B.STD_DT_BIRTH FECHA_NACIMIENTO,
+       DECODE (B.STD_ID_GENDER, 1, 'MASCULINO', 'FEMENINO') SEXO, A.STD_EMAIL CORREO, A.CME_N_DIVISION DIVISION, A.CME_N_GERENCIA GERENCIA, A.STD_N_JOB_CODE PUESTO,
+       A.CME_N_DEPARTAMENTO DEPARTAMENTO, A.STD_N_WORK_LOCAT LUGAR_TRABAJO, A.ID_REGION_COFETEL REGION, H.SSP_FEC_ANTIGUEDAD FECHA_ANIVERSARIO,
+       D.CME_ID_RED ID_JEFE, RTRIM (D.STD_N_FIRST_NAME || ' ' || D.STD_N_FAM_NAME_1 || ' ' || D.STD_N_MAIDEN_NAME) NOMBRE_JEFE,
+       E.CME_ID_RED ID_APROBADOR, RTRIM (E.STD_N_FIRST_NAME || ' ' || E.STD_N_FAM_NAME_1 || ' ' || E.STD_N_MAIDEN_NAME) NOMBRE_APROBADOR,
+       A.STD_N_LEG_ENT EMPRESA, A.STD_SS_NUMBER RFC, A.CME_ID_CONVENIO ID_CONVENIO, A.CME_N_CONVENIO NOMBRE_CONVENIO, 'INTERNO' TIPO_EMPLEADO,
+       SSP_ID_CENT_COSTO CENTRO_COSTOS
+  FROM M4CME_DATOS_EMP A,
+       STD_PERSON B,
+       M4SAR_H_HR_C_COSTO C,
+       M4CME_DATOS_EMP D,
+       M4CME_DATOS_EMP E,
+       STD_HR_PERIOD H
+ WHERE A.ID_EMPLEADO_INT = B.STD_ID_PERSON
+       AND A.ID_EMPLEADO_INT = H.STD_ID_HR(+)
+       AND A.STD_DT_START = H.STD_DT_START
+       AND A.ID_EMPLEADO_INT = C.SCO_ID_HR(+)
+       AND  SYSDATE >= C.DT_START
+       AND C.DT_END >= SYSDATE
+       AND A.ID_JEFE = D.ID_EMPLEADO_INT(+)
+       AND A.ID_APROBADOR = E.ID_EMPLEADO_INT(+)
+       AND A.CME_ESTADO = 'ACTIVO'
+       AND A.CME_TIPO_EMPLEADO = '1'
+       AND A.CME_ID_RED = #{idRedInt}
+UNION
+	SELECT A.CME_ID_RED ID_RED,
+       A.STD_N_FIRST_NAME NOMBRE,
+       A.STD_N_FAM_NAME_1 APELLIDO_PATERNO,
+       A.STD_N_MAIDEN_NAME APELLIDO_MATERNO,
+       B.STD_DT_BIRTH FECHA_NACIMIENTO,
+       DECODE (B.STD_ID_GENDER, 1, 'MASCULINO', 'FEMENINO') SEXO,
+       A.STD_EMAIL CORREO,
+       A.CME_N_DIVISION DIVISION,
+       A.CME_N_GERENCIA GERENCIA,
+       A.STD_N_JOB_CODE PUESTO,
+       A.CME_N_DEPARTAMENTO DEPARTAMENTO,
+       A.STD_N_WORK_LOCAT LUGAR_TRABAJO,
+       A.ID_REGION_COFETEL REGION,
+       A.STD_DT_START FECHA_ANIVERSARIO,
+       A.ID_JEFE ID_JEFE,
+       RTRIM (E.STD_N_FIRST_NAME
+       || ' '
+       || E.STD_N_FAM_NAME_1
+       || ' '
+       || E.STD_N_MAIDEN_NAME)
+          NOMBRE_JEFE,
+       A.ID_APROBADOR ID_APROBADOR,
+       RTRIM (F.STD_N_FIRST_NAME
+       || ' '
+       || F.STD_N_FAM_NAME_1
+       || ' '
+       || F.STD_N_MAIDEN_NAME)
+          NOMBRE_APROBADOR,
+       A.STD_N_LEG_ENT EMPRESA,
+       A.STD_SS_NUMBER RFC,
+       A.CME_ID_CONVENIO ID_CONVENIO,
+       A.CME_N_CONVENIO NOMBRE_CONVENIO,
+       'EXTERNO' TIPO_EMPLEADO,
+       NULL CENTRO_COSTOS
+  FROM M4CME_DATOS_EMP A,
+       STD_PERSON B,
+       STD_PERSON E,
+       STD_PERSON F
+ WHERE  A.ID_EMPLEADO = B.STD_ID_PERSON
+       AND A.ID_JEFE = E.STD_ID_PERSON
+       AND A.ID_APROBADOR = F.STD_ID_PERSON
+       AND A.CME_ESTADO = 'ACTIVO'
+       AND A.CME_TIPO_EMPLEADO = '2'
+       AND A.CME_ID_RED = #{idRedExt}
+	</select>
+	<resultMap type="Empleado" id="resultadoEmpleado">
+		<result column="ID_RED" property="idRed" />
+		<result column="NOMBRE" property="nombre" />
+		<result column="APELLIDO_PATERNO" property="apellidoPaterno" />
+		<result column="APELLIDO_MATERNO" property="apellidoMaterno" />
+		<result column="FECHA_NACIMIENTO" property="fechaNacimiento" />
+		<result column="SEXO" property="sexo" />
+		<result column="CORREO" property="correo" />
+		<result column="DIVISION" property="division" />
+		<result column="GERENCIA" property="gerencia" />
+		<result column="PUESTO" property="puesto" />
+		<result column="DEPARTAMENTO" property="departamento" />
+		<result column="LUGAR_TRABAJO" property="lugarTrabajo" />
+		<result column="REGION" property="region" />
+		<result column="FECHA_ANIVERSARIO" property="fechaAniversario" />
+		<result column="ID_JEFE" property="idJefe" />
+		<result column="NOMBRE_JEFE" property="nombreJefe" />
+		<result column="ID_APROBADOR" property="idAprobador" />
+		<result column="NOMBRE_APROBADOR" property="nombreAprobador" />
+		<result column="EMPRESA" property="empresa" />
+		<result column="RFC" property="rfc" />
+		<result column="ID_CONVENIO" property="idConvenio" />
+		<result column="NOMBRE_CONVENIO" property="nombreConvenio" />
+		<result column="TIPO_EMPLEADO" property="tipoEmpleado" />
+		<result column="CENTRO_COSTOS" property="centroCostos" />
+	</resultMap>
+</mapper>

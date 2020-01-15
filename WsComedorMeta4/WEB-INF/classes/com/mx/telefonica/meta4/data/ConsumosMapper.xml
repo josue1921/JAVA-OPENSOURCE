@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Consumos">
+	<select id="consultaConsumos1" resultMap="resultadoConsumos">
+	   SELECT CVE_CONSUMO,FECHA,NUMERO_EMPLEADO,OPCION,TIPO,DESCUENTO,EFECTIVO FROM M4CMX_CONS_COMEDOR WHERE NUMERO_EMPLEADO = '${numEmpleado}' AND FECHA >= TO_DATE('${fechIni}','DD/MM/YYYY') AND TO_DATE('${fechFin}','DD/MM/YYYY') >= FECHA 
+	</select>
+	<select id="consultaConsumos2" resultMap="resultadoConsumos">
+	   SELECT CVE_CONSUMO,FECHA,NUMERO_EMPLEADO,OPCION,TIPO,DESCUENTO,EFECTIVO FROM M4CMX_CONS_COMEDOR WHERE NUMERO_EMPLEADO = '${numEmpleado}'
+	</select>
+	<resultMap type="Consumos" id="resultadoConsumos">
+		<result column="CVE_CONSUMO" property="cveConsumo" />
+		<result column="FECHA" property="fecha" />
+		<result column="NUMERO_EMPLEADO" property="numeroEmpleado" />
+		<result column="OPCION" property="opcion" />
+		<result column="TIPO" property="tipo" />
+		<result column="DESCUENTO" property="descuento" />
+		<result column="EFECTIVO" property="efectivo" />
+	</resultMap>
+</mapper>
