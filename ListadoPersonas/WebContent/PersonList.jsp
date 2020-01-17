@@ -13,7 +13,8 @@
             <a href="new">Registrar</a>
             &nbsp;&nbsp;&nbsp;
             <a href="list">Listado</a>
-             
+            &nbsp;&nbsp;&nbsp;
+            <a href="busqueda">Busqueda</a>
         </h2>
     </center>
     <div align="center">

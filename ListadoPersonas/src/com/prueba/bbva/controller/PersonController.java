@@ -16,6 +16,7 @@ public class PersonController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private PersonsDAO personDAO;
+	private String ACTION_PETICION = "default";
 
 	public void init() {
 		String jdbcURL = getServletContext().getInitParameter("jdbcURL");
@@ -52,6 +53,12 @@ public class PersonController extends HttpServlet {
 			case "/update":
 				updatePerson(request, response);
 				break;
+			case "/busqueda":
+				search(request, response);
+				break;
+			case "/searchBy":
+				searchBy(request, response);
+				break;
 			default:
 				listPerson(request, response);
 				break;
@@ -63,7 +70,8 @@ public class PersonController extends HttpServlet {
 
 	private void listPerson(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<Persons> listPerson = personDAO.listAllPersons();
+		List<Persons> listPerson;
+		listPerson = personDAO.listAllPersons();
 		request.setAttribute("listPerson", listPerson);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("PersonList.jsp");
 		dispatcher.forward(request, response);
@@ -122,4 +130,25 @@ public class PersonController extends HttpServlet {
 		response.sendRedirect("list");
 
 	}
+	
+	private void search(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("busquedaPs.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void searchBy(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<Persons> listPerson;
+		Persons person = new Persons();
+
+		person.setId(Integer.parseInt(request.getParameter("searchId")));
+		person.setNombre(request.getParameter("searchName"));
+		person.setRfc(request.getParameter("searchRfc"));
+			
+		listPerson = personDAO.listAllPersons();
+		request.setAttribute("listPerson", listPerson);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("resultBusqueda.jsp");
+		dispatcher.forward(request, response);
+	}	
 }

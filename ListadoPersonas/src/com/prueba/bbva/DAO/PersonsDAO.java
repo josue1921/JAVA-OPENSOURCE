@@ -62,10 +62,40 @@ public class PersonsDAO {
     public List<Persons> listAllPersons() throws SQLException {
         List<Persons> listPersons = new ArrayList<>();
          
-        String sql = "SELECT * FROM test.app_personas";
+        String sql = "SELECT * FROM test.app_personas ORDER BY id_person DESC";
          
         connect();
          
+        Statement statement = jdbcConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+         
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id_person");
+            String nombre = resultSet.getString("name_person");
+            String apellidoP = resultSet.getString("apat_person");
+            String apellidoM = resultSet.getString("amat_person");
+            String numTelefonico = resultSet.getString("phone");
+            String correo = resultSet.getString("email");
+            String gender = resultSet.getString("genero");
+            String rfc = resultSet.getString("RFC");
+             
+            Persons persona = new Persons(id, nombre, apellidoP, apellidoM, numTelefonico, correo, gender, rfc);
+            listPersons.add(persona);
+        }
+         
+        resultSet.close();
+        statement.close();
+         
+        disconnect();
+         
+        return listPersons;
+    }
+    
+    public List<Persons> listBySearch() throws SQLException {
+        List<Persons> listPersons = new ArrayList<>();
+        String sql = "SELECT * FROM test.app_personas ";
+         
+        connect();
         Statement statement = jdbcConnection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
          
