@@ -1,6 +1,8 @@
 package com.exercises.test;
 
 import java.security.Permission;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class testJava {
@@ -133,7 +135,8 @@ public class testJava {
 
 		// # Practice 10
 		/* Java Int to String */
-
+		
+		/*
 		DoNotTerminate.forbidExit();
 
 		try {
@@ -153,8 +156,31 @@ public class testJava {
 		} catch (DoNotTerminate.ExitTrappedException e) {
 			System.out.println("Unsuccessful Termination!!");
 		}
+		*/
 		
 		// # Practice 11
+		Scanner in = new Scanner(System.in);
+		double pago = in.nextDouble();
+		in.close();
+		      
+		String us = NumberFormat.getCurrencyInstance(Locale.US).format(pago);
+		String indian = NumberFormat.getCurrencyInstance(new Locale("en", "IN")).format(pago);
+		String china = NumberFormat.getCurrencyInstance(new Locale("zh", "CN")).format(pago);
+		String france = NumberFormat.getCurrencyInstance(Locale.FRANCE).format(pago);
+		
+		System.out.println("US: " + us);
+		System.out.println("India: " + indian);
+		System.out.println("China: " + china);
+		System.out.println("France: " + france);
+		
+		// # Practice 12
+		
+
+		// # Practice 13
+		
+		
+		// # Practice 14
+		
 		
 		
 		
